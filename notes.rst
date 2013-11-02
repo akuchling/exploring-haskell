@@ -72,6 +72,13 @@ Tuples:
   snd (a,b) == b
   zip lst1 lst2 = (e11, e21), (e12, e22), ...
 
+Importing::
+
+  import modname  -- adds all names to global
+  import modname (name1, name2) -- import only specific names
+  import modname hiding (name1) -- exclude a name
+  import qualified modname -- require modname. prefix
+  import qualified modname as newname -- rename on import
 
 
 Links
