@@ -38,3 +38,15 @@ marginalTax income
  | income < 398350 = 0.33
  | income < 400000 = 0.35
  | otherwise       = 0.396
+
+{-
+ Collatz sequence: This function will return an infinite list
+ of the sequence based upon a starting point.
+ -}
+
+collatzSeq :: Integral a => a -> [a]
+collatzSeq initial = [initial] ++ (collatzSeq (collatzFunc initial))
+           where collatzFunc :: Integral a => a -> a
+                 collatzFunc n
+                      | (n `mod` 2) == 0 = n `div` 2
+                      | otherwise        = 3 * n + 1
