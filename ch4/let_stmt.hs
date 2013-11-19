@@ -1,4 +1,6 @@
 
+import Data.List (maximumBy)
+
 {-
  Exercise the let statement and pattern-matching
  -}
@@ -58,8 +60,20 @@ marginalTax income
  -}
 
 collatzSeq :: Integral a => a -> [a]
-collatzSeq initial = [initial] ++ (collatzSeq (collatzFunc initial))
+collatzSeq 1 = [1]
+collatzSeq initial = ([initial] ++
+                      collatzSeq (collatzFunc initial))
            where collatzFunc :: Integral a => a -> a
                  collatzFunc n
                       | (n `mod` 2) == 0 = n `div` 2
                       | otherwise        = 3 * n + 1
+
+collatzLength initial = (initial, length (collatzSeq initial))
+collatzMaximum limit =
+   let series = [collatzLength x | x <- [1..limit]]
+       paircomp a b = compare (snd a) (snd b)
+   in  maximumBy paircomp series
+
+-- Find the number <1 million that produces the longest
+-- Collatz sequence.
+euler14 = collatzMaximum 1000000
