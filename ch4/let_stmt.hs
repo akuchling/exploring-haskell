@@ -24,3 +24,17 @@ q2 (p:xs) = (q2 lesser) ++ [p] ++ (q2 greater)
     where
         lesser  = filter (< p) xs
         greater = filter (>= p) xs
+
+
+{-
+ Return the top marginal tax rate based on your income (single)
+ -}
+
+marginalTax income
+ | income <   8925 = 0.10
+ | income <  36250 = 0.15
+ | income <  87850 = 0.25
+ | income < 183250 = 0.28
+ | income < 398350 = 0.33
+ | income < 400000 = 0.35
+ | otherwise       = 0.396
