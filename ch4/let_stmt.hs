@@ -25,6 +25,18 @@ q2 (p:xs) = (q2 lesser) ++ [p] ++ (q2 greater)
         lesser  = filter (< p) xs
         greater = filter (>= p) xs
 
+{- Rewritten to use a case expression -}
+
+qs_case xs = case xs of
+   [] -> []
+   x:[] -> [x]
+   x:xs -> let pivot = x
+            in let lesser = [e | e <- xs, e < pivot]
+                   pivots = filter (== pivot) xs
+                   greater = [e | e <- xs, e > pivot]
+               in ((qs_case lesser) ++
+                   pivots ++ [pivot] ++
+                   (qs_case greater))
 
 {-
  Return the top marginal tax rate based on your income (single)
@@ -38,6 +50,7 @@ marginalTax income
  | income < 398350 = 0.33
  | income < 400000 = 0.35
  | otherwise       = 0.396
+
 
 {-
  Collatz sequence: This function will return an infinite list
